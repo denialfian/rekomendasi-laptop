@@ -1,23 +1,25 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08 Jun 2017 pada 09.52
--- Versi Server: 5.6.21
--- PHP Version: 5.6.3
+-- Generation Time: 10 Des 2017 pada 18.08
+-- Versi Server: 10.1.24-MariaDB
+-- PHP Version: 7.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `srl`
+-- Database: `slr_150data`
 --
 
 -- --------------------------------------------------------
@@ -26,8 +28,8 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `laptop`
 --
 
-CREATE TABLE IF NOT EXISTS `laptop` (
-`id` int(11) NOT NULL,
+CREATE TABLE `laptop` (
+  `id` int(11) NOT NULL,
   `name` varchar(225) NOT NULL,
   `brand` varchar(100) NOT NULL,
   `series` varchar(225) DEFAULT NULL,
@@ -41,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `laptop` (
   `storage` varchar(225) NOT NULL,
   `harga` int(11) NOT NULL,
   `gambar` varchar(225) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `laptop`
@@ -205,12 +207,12 @@ INSERT INTO `laptop` (`id`, `name`, `brand`, `series`, `os`, `tahun_rilis`, `u_l
 -- Struktur dari tabel `rating`
 --
 
-CREATE TABLE IF NOT EXISTS `rating` (
-`id` int(11) NOT NULL,
+CREATE TABLE `rating` (
+  `id` int(11) NOT NULL,
   `user_profil_id` int(11) NOT NULL,
   `laptop_id` int(11) NOT NULL,
   `nilai` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `rating`
@@ -376,21 +378,21 @@ INSERT INTO `rating` (`id`, `user_profil_id`, `laptop_id`, `nilai`) VALUES
 -- Struktur dari tabel `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-`id` int(11) NOT NULL,
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(64) NOT NULL,
   `joined` datetime NOT NULL,
   `group` int(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `joined`, `group`) VALUES
-(3, 'deni', '$2y$11$jy956InipcW93AfR9GBUfOa9HElyYxGlg0EfMoW6UgLQUEzmXrRna', '2017-03-19 15:35:02', 1),
-(6, 'member1', '$2y$11$/fp4wEfTUmnPT7aUx2o/LecmQs5hftUZibm2cdCFGoKwBGpnX7LaS', '2017-03-28 15:16:49', 2),
+(3, 'admin', '$2y$11$0ih/RcUIScr19OwCP/3DOeU.IRsqylaxVbVKyd6QFbDa4u6vwFfam', '2017-03-19 15:35:02', 1),
+(6, 'member1', '$2y$11$qc1cX8jmi6dJTV8vT80yxe7WLI2c7LCkn/IsPesl13P3dDiMLqKAm', '2017-03-28 15:16:49', 2),
 (7, 'member2', '$2y$11$HYzwGPIrlBW4uagRi1y5eeyFz9iGRAbzNZmQqZcREXjWj.iVHa3Im', '2017-03-28 15:19:51', 2),
 (8, 'member3', '$2y$11$QZJVmbAHwBWzAaoWFE4/0O7Izo8PNo3espUH/6vnNujh/dmPxKGGK', '2017-03-28 15:20:59', 2),
 (9, 'member4', '$2y$11$FMoT9d/1Ob8OaYN6uZl7OeGRerg6DWl.FxtfkSqoRvjtdrFjVmK7G', '2017-03-28 15:22:08', 2),
@@ -404,12 +406,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `joined`, `group`) VALUES
 -- Struktur dari tabel `users_info`
 --
 
-CREATE TABLE IF NOT EXISTS `users_info` (
-`user_id` int(11) NOT NULL,
+CREATE TABLE `users_info` (
+  `user_id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `tgl_lahir` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `users_info`
@@ -430,8 +432,8 @@ INSERT INTO `users_info` (`user_id`, `name`, `email`, `tgl_lahir`) VALUES
 -- Struktur dari tabel `users_likes`
 --
 
-CREATE TABLE IF NOT EXISTS `users_likes` (
-`user_id` int(11) NOT NULL,
+CREATE TABLE `users_likes` (
+  `user_id` int(11) NOT NULL,
   `brand` varchar(50) DEFAULT NULL,
   `series` varchar(225) DEFAULT NULL,
   `os` varchar(225) DEFAULT NULL,
@@ -445,7 +447,7 @@ CREATE TABLE IF NOT EXISTS `users_likes` (
   `storage` int(11) DEFAULT NULL,
   `all_likes` text,
   `cek` enum('y','n') DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `users_likes`
@@ -466,13 +468,13 @@ INSERT INTO `users_likes` (`user_id`, `brand`, `series`, `os`, `tahun_rilis`, `u
 -- Struktur dari tabel `users_profil`
 --
 
-CREATE TABLE IF NOT EXISTS `users_profil` (
-`id` int(11) NOT NULL,
+CREATE TABLE `users_profil` (
+  `id` int(11) NOT NULL,
   `users_id` int(11) DEFAULT NULL,
   `users_info_id` int(11) DEFAULT NULL,
   `users_likes_id` int(11) DEFAULT NULL,
   `rekomendasi` enum('cb','cf','mixed') DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `users_profil`
@@ -495,37 +497,41 @@ INSERT INTO `users_profil` (`id`, `users_id`, `users_info_id`, `users_likes_id`,
 -- Indexes for table `laptop`
 --
 ALTER TABLE `laptop`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `rating`
 --
 ALTER TABLE `rating`
- ADD PRIMARY KEY (`id`), ADD KEY `user_profil_id` (`user_profil_id`), ADD KEY `laptop_id` (`laptop_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_profil_id` (`user_profil_id`),
+  ADD KEY `laptop_id` (`laptop_id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users_info`
 --
 ALTER TABLE `users_info`
- ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `users_likes`
 --
 ALTER TABLE `users_likes`
- ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `users_profil`
 --
 ALTER TABLE `users_profil`
- ADD PRIMARY KEY (`id`), ADD KEY `users_info_id` (`users_info_id`,`users_likes_id`), ADD KEY `users_likes_id` (`users_likes_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_info_id` (`users_info_id`,`users_likes_id`),
+  ADD KEY `users_likes_id` (`users_likes_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -535,32 +541,32 @@ ALTER TABLE `users_profil`
 -- AUTO_INCREMENT for table `laptop`
 --
 ALTER TABLE `laptop`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=151;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 --
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `users_info`
 --
 ALTER TABLE `users_info`
-MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `users_likes`
 --
 ALTER TABLE `users_likes`
-MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `users_profil`
 --
 ALTER TABLE `users_profil`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -569,15 +575,16 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 -- Ketidakleluasaan untuk tabel `rating`
 --
 ALTER TABLE `rating`
-ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`laptop_id`) REFERENCES `laptop` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`user_profil_id`) REFERENCES `users_profil` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`laptop_id`) REFERENCES `laptop` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`user_profil_id`) REFERENCES `users_profil` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `users_profil`
 --
 ALTER TABLE `users_profil`
-ADD CONSTRAINT `users_profil_ibfk_1` FOREIGN KEY (`users_info_id`) REFERENCES `users_info` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `users_profil_ibfk_2` FOREIGN KEY (`users_likes_id`) REFERENCES `users_likes` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `users_profil_ibfk_1` FOREIGN KEY (`users_info_id`) REFERENCES `users_info` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_profil_ibfk_2` FOREIGN KEY (`users_likes_id`) REFERENCES `users_likes` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
